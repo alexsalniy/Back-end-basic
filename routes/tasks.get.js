@@ -31,12 +31,11 @@ router.get('/tasks',
                 break;
         };
         switch (filter.sortByDate) {
-            case 'earlier':
+            case 'asc':
                 filteredTodos = filteredTodos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
                 break;
             default:
                 filteredTodos = filteredTodos.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-                console.log("default")
                 break;
         }
         // let newTasks = todos;

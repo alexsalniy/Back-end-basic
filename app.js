@@ -8,7 +8,7 @@ import patchTask from './routes/task.patch.js'
 
 const app = express()
 
-const PORT = 3008;
+const PORT = 3009;
 console.log('Server started on port ' + PORT)
 
 app.use(express.json()) 
