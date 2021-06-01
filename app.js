@@ -8,22 +8,10 @@ import patchTask from './routes/task.patch.js'
 
 const app = express()
 
-const PORT = 3006;
+const PORT = 3008;
 console.log('Server started on port ' + PORT)
 
 app.use(express.json()) 
-
-app.post('/',(req, res) => {
-    console.log(req.body);
-    res.status(200).json('Server works')
-})
-
-// const task = {
-//     "name" : "name",
-//     "creatdeAt": 'creatdeAt'
-// };
-
-// const data = JSON.stringify(task);
 
 async function start () {
     try {
@@ -40,10 +28,4 @@ app.use(deleteTask);
 
 start()
 
-// fs.writeFile('todos.json', data, (err) => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log('JSON data is saved');
-// })
 
