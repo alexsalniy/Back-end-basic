@@ -2,11 +2,12 @@ import express from 'express'
 import fs from 'fs'
 import getTasks from './routes/tasks.get.js'
 import postTask from './routes/task.post.js'
+import deleteTask from './routes/task.delete.js'
 
 
 const app = express()
 
-const PORT = 3004;
+const PORT = 3005;
 console.log('Server started on port ' + PORT)
 
 app.use(express.json()) 
@@ -33,6 +34,7 @@ async function start () {
 
 app.use(getTasks);
 app.use(postTask);
+app.use(deleteTask);
 
 start()
 

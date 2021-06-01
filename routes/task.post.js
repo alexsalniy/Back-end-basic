@@ -6,14 +6,15 @@ const router = Router();
 
 router.post('/task', (req, res) => {
     fs.readFile('todos.json', 'utf-8', (err, data) => {
-        const task = req.body
+        console.log('request', req.body);
+        const task = req.body;
         const todos = JSON.parse(data);
-        const newTasks = [...todos, {id: uuidv4(), ...task, date: new Date(Date.now())}];
-        const editedJSON = JSON.stringify(newTasks, null, 2)
+        const newTasks = [...todos, {uuid: uuidv4(), ...task, date: new Date(Date.now())}];
+        const editedJSON = JSON.stringify(newTasks, null, 2);
         fs.writeFile('todos.json', editedJSON, err => {
             return res.send({msg: 'Task was posted', task});
-        })
-    })
-})
+        });
+    });
+});
 
 export default router;
