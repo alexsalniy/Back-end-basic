@@ -14,5 +14,8 @@ app.use(getTasks);
 app.use(postTask);
 app.use(patchTask);
 app.use(deleteTask);
+app.get('/', (req, res) =>{
+    res.send('AAAAA')
+})
 
 app.listen(PORT, () => {console.log('Server started on port ' + PORT)})
