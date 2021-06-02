@@ -16,6 +16,7 @@ router.get('/tasks', (req, res) => {
         console.log(filter.sortByDone)
         const newTodos = JSON.parse(data);
         let filteredTodos = newTodos;
+        const length = filteredTodos.length
         switch (filter.sortByDone) {
             case 'done':
                 filteredTodos = newTodos.filter((item) => item.done === true);
@@ -35,9 +36,12 @@ router.get('/tasks', (req, res) => {
                 filteredTodos = filteredTodos.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
                 break;
         }
-        // let newTasks = todos;
+        const pages = Math.ceil(length / 5);
+        const indexOfLastTodo = filter.page * 5;
+        const indexOfFirstTodo = indexOfLastTodo - 5;
+        const slicedTodos = filteredTodos.slice(indexOfFirstTodo, indexOfLastTodo);
         console.log(data);
-        res.send(filteredTodos)
+        res.send({slicedTodos, pages})
     })
 })
 
