@@ -10,6 +10,7 @@ router.post('/task',
     body('name').isString(),
     body('done').isBoolean(),
     (req, res) => {
+        console.log(req.body)
         const myValidRes = validationResult(req);
         if(!myValidRes.isEmpty()) {
             return res.status(400).send({myValidRes: myValidRes.array() });
@@ -21,7 +22,7 @@ router.post('/task',
             }
             const task = req.body;
             const todos = JSON.parse(data);
-            const newTasks = [...todos, {uuid: uuidv4(), ...task, date: new Date(Date.now())}];
+            const newTasks = [...todos, {uuid: uuidv4(), ...task, createdAt: new Date(Date.now())}];
             const editedJSON = JSON.stringify(newTasks, null, 2);
             fs.writeFile('todos.json', editedJSON, err => {
                 if (err) {

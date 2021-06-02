@@ -4,16 +4,13 @@ import fs from 'fs'
 
 const router = Router();
 
-router.get('/tasks', 
-    // body('filterByDate').isString(),
-    // body('filterByDone').isString(),
-    (req, res) => {
+router.get('/tasks', (req, res) => {
     const myValidRes = validationResult(req);
     if(!myValidRes.isEmpty()) {
         return res.status(400).send({myValidRes: myValidRes.array() });
     }
     fs.readFile('todos.json', 'utf-8', (err, data) => {
-        const filter = req.body
+        const filter = req.query
         console.log(filter)
         console.log(filter.sortByDate)
         console.log(filter.sortByDone)
@@ -32,10 +29,10 @@ router.get('/tasks',
         };
         switch (filter.sortByDate) {
             case 'asc':
-                filteredTodos = filteredTodos.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+                filteredTodos = filteredTodos.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt));
                 break;
             default:
-                filteredTodos = filteredTodos.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+                filteredTodos = filteredTodos.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
                 break;
         }
         // let newTasks = todos;
